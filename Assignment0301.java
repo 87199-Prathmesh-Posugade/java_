@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
 public class Invoice {
-	static double totalBill;
 	private String partNumber;
 	private String partDes;
 	private int quantity;
@@ -9,9 +8,9 @@ public class Invoice {
 	//static members can be initialized at time of declaration
 	//in reference s not any other objects reference is allowed to store due to final field
 	final static Scanner s=new Scanner(System.in);
-	//static members can be initialized at static block(it execute only ones by jvm)
+	
 	static {
-		totalBill=.0;
+		//static members can be initialized at static block(it execute only ones by jvm)		
 	}
 	
 	public Invoice() {
@@ -81,26 +80,35 @@ public class Invoice {
 		}
 		else {
 			setPartPrice(n);			
-		}		
+		}
 	}
 	public void display() {
 		System.out.println(getPartNumber()+"\t\t"+getPartDes()+"\t\t"+getQuantity()+"\t\t"+getPartPrice());
 	}
+	public static double calculateTotalBill(Invoice... i){
+		double total=.0;
+		for(Invoice o: i) {
+			total=total+(o.getPartPrice()*o.getQuantity());
+		}
+		return total;
+	}
+	
 }
-
 
 public class Assignment0301 {
 
 	public static void main(String[] args) {
 		Invoice i1=new Invoice();
 		Invoice i2=new Invoice();
+		Invoice i3=new Invoice();
 		i1.accept();
 		i2.accept();
+		i3.accept();
 		System.out.println("getPartNumber()"+"\t"+"getPartDes()"+"\t"+"getQuantity()"+"\t"+"getPartPrice()");
 		i1.display();
 		i2.display();
-		Invoice.totalBill=(i1.getPartPrice()*i1.getQuantity())+(i2.getPartPrice()*i2.getQuantity());
-		System.out.println("Total Bill: "+Invoice.totalBill);
+		i3.display();
+		System.out.println("Total Bill: "+Invoice.calculateTotalBill(i1, i2, i3));
 	}
 
 }
