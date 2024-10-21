@@ -55,23 +55,28 @@ public class FruitBasket {
 				System.out.println();
 				for (int i = 0; i < index; i++) {
 					if (bucket[i].getisFresh()) {
-						System.out.print(bucket[i].toString() + "\n");
+						System.out.print(bucket[i] + "\n");
 					}
 				}
 				break;
 			case 6:
 				System.out.println();
+				boolean notStale = true;
 				for (int i = 0; i < index; i++) {
 					if (!bucket[i].getisFresh()) {
+						notStale = false;
 						System.out.print(bucket[i].taste() + "\n");
 					}
+				}
+				if(notStale) {
+					System.err.print("No stale fruits only fresh fruits available :)\n");					
 				}
 				break;
 			case 7:
 				System.out.println();
 				for (int i = 0; i < index; i++) {
 					if (bucket[i].getisFresh()) {
-						System.out.print((i + 1) + ". " + bucket[i].toString() + "\n");
+						System.out.print((i + 1) + ". " + bucket[i] + "\n");
 					}
 				}
 				System.out.print("\nEnter Fruit Id: ");
